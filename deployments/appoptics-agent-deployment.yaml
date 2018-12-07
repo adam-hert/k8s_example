@@ -22,7 +22,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: APPOPTICS_TOKEN
-              value: 'YOUR_TOKEN'
+              value: 'PLACEHOLDER'
             - name: APPOPTICS_ENABLE_APACHE
               value: 'false'
             - name: APPOPTICS_ENABLE_DOCKER

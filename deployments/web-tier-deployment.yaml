@@ -14,7 +14,7 @@ spec:
       containers:
       - env:
         - name: APPOPTICS_SERVICE_KEY
-          value: YOUR_TOKEN:web-tier
+          value: PLACEHOLDER:web-tier
         - name: ROBBOSS_SERVICE_AUTH_URL
           value: http://auth-service:9090
         - name: ROBBOSS_SERVICE_BOOKING_URL

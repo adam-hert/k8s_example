@@ -14,7 +14,7 @@ spec:
       containers:
       - env:
         - name: APPOPTICS_SERVICE_KEY
-          value: YOUR_TOKEN:booking-service
+          value: PLACEHOLDER:booking-service
         image: adamhert1/compose_booking-service
         name: booking-service
         ports:
