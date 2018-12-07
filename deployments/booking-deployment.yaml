@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: booking-service
+  labels:
+    service: booking-service
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        service: booking-service
+    spec:
+      containers:
+      - env:
+        - name: APPOPTICS_SERVICE_KEY
+          value: YOUR_TOKEN:booking-service
+        image: adamhert1/compose_booking-service
+        name: booking-service
+        ports:
+        - containerPort: 8080
+      hostname: booking-service
+      restartPolicy: Always

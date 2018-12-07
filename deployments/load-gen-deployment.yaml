@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: load-gen
+  labels:
+    service: load-gen
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        service: load-gen
+    spec:
+      containers:
+      - image: adamhert1/compose_load-gen
+        name: load-gen
+        ports:
+        - containerPort: 3005
+      hostname: load-gen-1
+      restartPolicy: Always

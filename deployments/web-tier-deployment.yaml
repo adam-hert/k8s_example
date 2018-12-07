@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: web-tier
+  labels:
+    service: web-tier
+spec:
+  replicas: 4
+  template:
+    metadata:
+      labels:
+        service: web-tier
+    spec:
+      containers:
+      - env:
+        - name: APPOPTICS_SERVICE_KEY
+          value: YOUR_TOKEN:web-tier
+        - name: ROBBOSS_SERVICE_AUTH_URL
+          value: http://auth-service:9090
+        - name: ROBBOSS_SERVICE_BOOKING_URL
+          value: http://booking-service:8080
+        image: adamhert1/compose_web-tier
+        name: web-tier
+        ports:
+        - containerPort: 3000
+        - containerPort: 2998
+      hostname: web-tier-1
+      restartPolicy: Always

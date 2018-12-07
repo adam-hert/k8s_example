@@ -1,0 +1,57 @@
+kind: Deployment
+apiVersion: apps/v1beta2
+metadata:
+  name: appoptics-agent-k8s
+  namespace: kube-system
+  labels:
+    app: appoptics-agent-k8s
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: appoptics-agent-k8s
+  template:
+    metadata:
+      labels:
+        app: appoptics-agent-k8s
+    spec:
+      serviceAccountName: appoptics-agent-serviceaccount
+      containers:
+        - name: appoptics-agent-k8s
+          image: 'appoptics/appoptics-agent-docker:v0.7'
+          imagePullPolicy: Always
+          env:
+            - name: APPOPTICS_TOKEN
+              value: 'YOUR_TOKEN'
+            - name: APPOPTICS_ENABLE_APACHE
+              value: 'false'
+            - name: APPOPTICS_ENABLE_DOCKER
+              value: 'false'
+            - name: APPOPTICS_ENABLE_ELASTICSEARCH
+              value: 'false'
+            - name: APPOPTICS_ENABLE_KUBERNETES
+              value: 'true'
+            - name: APPOPTICS_ENABLE_MESOS
+              value: 'false'
+            - name: APPOPTICS_ENABLE_MONGODB
+              value: 'false'
+            - name: APPOPTICS_ENABLE_MYSQL
+              value: 'false'
+            - name: APPOPTICS_ENABLE_RABBITMQ
+              value: 'false'
+            - name: APPOPTICS_ENABLE_ZOOKEEPER
+              value: 'false'
+            - name: APPOPTICS_DISABLE_HOSTAGENT
+              value: 'true'
+          resources:
+            limits:
+              cpu: 100m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
